@@ -14,19 +14,16 @@ SC_MODULE(monitor){
   
   // Function to monitor signals
   void monitor_signals(){
-	while(true){
-	  cout << sc_time_stamp();
-	  cout << "Reset" << rst_i.read;
-	  cout << "Input" << d_i.read;
-	  cout << "Output" << y_o.read;
-	  cout << endl;
-	  wait();
-	}
+	cout << sc_time_stamp();
+	cout << " Reset " << rst_i.read();
+	cout << " Input " << d_i.read();
+	cout << " Output " << y_o.read();
+	cout << endl;
   }
   
   // Constructor
-  SC_CONT(){
-	SC_THREAD(monitor_signals);
+  SC_CTOR(monitor){
+	SC_METHOD(monitor_signals);
 	sensitive <<clk_i.pos();
   }
 };
